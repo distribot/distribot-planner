@@ -1,5 +1,4 @@
 
-require 'facets/module/cattr'
 require 'tsort'
 require 'distribot/plan'
 require 'distribot/task'
