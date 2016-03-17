@@ -15,7 +15,7 @@ module Distribot
         self.handler_data = {
           name: handler[:name],
           version: handler[:version]
-        }.reject{ |k,v| v.nil? }
+        }.reject{ |_key,value| value.nil? }
       else
         raise TaskConfigError.new 'task handler must be a String or Hash, not a %s' % handler.class.to_s
       end

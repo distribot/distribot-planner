@@ -26,7 +26,7 @@ module Distribot
     end
 
     def schedule
-      grouped = tsort_each_child.map{|parent, tasks| tasks}
+      grouped = tsort_each_child.map{|_parent, tasks| tasks}
       grouped.map{ |g| g.map(&:handler_data) }
     end
 
