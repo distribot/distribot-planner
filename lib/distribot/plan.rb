@@ -1,5 +1,7 @@
 
+require 'ostruct'
 module Distribot
+
   class Plan
     include TSort
     attr_accessor :name, :tasks
@@ -13,6 +15,12 @@ module Distribot
     end
     def tsort_each_node(node, &block)
       children(node).each(&block)
+    end
+
+    def group(name, options={}, &block)
+      task_group = TaskGroup.new(name, options[:depends_on], self)
+      task_group.instance_eval(&block)
+      self.tasks += task_group.tasks
     end
 
     def task(name, options={}, &block)

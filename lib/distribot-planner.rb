@@ -3,6 +3,7 @@ require 'facets/module/cattr'
 require 'tsort'
 require 'distribot/plan'
 require 'distribot/task'
+require 'distribot/task_group'
 
 module Distribot
   class TaskConfigError < StandardError; end
