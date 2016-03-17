@@ -44,12 +44,5 @@ module Distribot
     def tsort_each_child(&block)
       tasks.group_by(&:depends_on).each(&block)
     end
-    def tsort_each_node(node, &block)
-      children(node).each(&block)
-    end
-
-    def children(task)
-      tasks.select{|t| t.depends_on == task.name}
-    end
   end
 end
