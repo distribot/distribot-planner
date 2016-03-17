@@ -19,7 +19,7 @@ require 'byebug'
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'distribot-plan'
+require 'distribot-planner'
 
 Bundler.load
 
@@ -44,6 +44,10 @@ def configure_rspec
 
     if config.files_to_run.one?
       config.default_formatter = 'doc'
+    end
+
+    config.before(:each) do
+      Distribot::Plan.reset!
     end
 
     config.order = :random
