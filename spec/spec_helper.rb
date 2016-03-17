@@ -8,7 +8,7 @@ unless is_rake_exec
     add_filter '.vendor/'
     add_filter 'spec/'
   end
-  SimpleCov.minimum_coverage 52
+  SimpleCov.minimum_coverage 100
 end
 
 require 'rspec'
