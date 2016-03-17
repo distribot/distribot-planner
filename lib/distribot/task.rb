@@ -2,12 +2,12 @@
 module Distribot
   class Task < Struct.new(:name, :depends_on, :handler_data)
     def handler(handler)
-      case handler.class
-      when String, Class
+      case handler.class.to_s
+      when 'String', 'Class'
         self.handler_data = {
           name: handler
         }
-      when Hash
+      when 'Hash'
         handler[:version] ||= nil
         unless handler.keys.sort == [:name, :version]
           raise TaskConfigError.new 'task handler must contain :name and :version'

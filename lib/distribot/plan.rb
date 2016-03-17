@@ -18,7 +18,7 @@ module Distribot
     end
 
     def group(name, options={}, &block)
-      task_group = TaskGroup.new(name, options[:depends_on], self)
+      task_group = TaskGroup.new(name, options[:depends_on])
       task_group.instance_eval(&block)
       self.tasks += task_group.tasks
     end

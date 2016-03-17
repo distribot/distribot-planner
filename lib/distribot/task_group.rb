@@ -1,13 +1,7 @@
 
 module Distribot
-  class TaskGroup
-    attr_accessor :tasks, :name, :depends_on, :plan
-
-    def initialize(name, depends_on, plan)
-      self.name = name
-      self.depends_on = depends_on
-      self.plan = plan
-    end
+  class TaskGroup < Struct.new(:name, :depends_on)
+    attr_accessor :tasks
 
     def handler(handler_data)
       @tasks ||= [ ]
