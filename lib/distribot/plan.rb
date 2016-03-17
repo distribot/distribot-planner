@@ -10,15 +10,8 @@ module Distribot
       @tasks = [ ]
     end
 
-    def tsort_each_child(&block)
-      tasks.group_by(&:depends_on).each(&block)
-    end
-    def tsort_each_node(node, &block)
-      children(node).each(&block)
-    end
-
     def group(name, options={}, &block)
-      task_group = TaskGroup.new(name, options[:depends_on], self)
+      task_group = TaskGroup.new(name, options[:depends_on])
       task_group.instance_eval(&block)
       self.tasks += task_group.tasks
     end
@@ -37,11 +30,6 @@ module Distribot
       grouped.map{ |g| g.map(&:handler_data) }
     end
 
-    private
-    def children(task)
-      tasks.select{|t| t.depends_on == task.name}
-    end
-
     def self.all
       @@plans ||= [ ]
       @@plans
@@ -49,6 +37,12 @@ module Distribot
 
     def self.reset!
       @@plans = [ ]
+    end
+
+    private
+
+    def tsort_each_child(&block)
+      tasks.group_by(&:depends_on).each(&block)
     end
   end
 end
