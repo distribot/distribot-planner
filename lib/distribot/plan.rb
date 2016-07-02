@@ -27,7 +27,15 @@ module Distribot
 
     def schedule
       grouped = tsort_each_child.map{|_parent, tasks| tasks}
-      grouped.map{ |g| g.map(&:handler_data) }
+      grouped.each_with_index.map do |group, idx|
+        info = {
+          name: 'phase %d/%d' % [ idx + 1, grouped.count ],
+          handlers: group.map(&:handler_data)
+        }
+        info.merge!(is_initial: true) if idx == 0
+        info.merge!(is_final: true) if idx + 1 == grouped.count
+        info
+      end
     end
 
     def self.all

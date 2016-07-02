@@ -107,10 +107,10 @@ describe Distribot::Plan do
         end
       end
       @expected_schedule = [
-        [{name: 'Step1Handler'}],
-        [{name: 'Foo'},{name: 'Bar'},{name: 'Baz'}],
-        [{name: 'Bux'},{name: 'Qux'}],
-        [{name: 'Flux'}]
+        {name: 'phase 1/4', is_initial: true, handlers: [{name: 'Step1Handler'}]},
+        {name: 'phase 2/4', handlers: [{name: 'Foo'},{name: 'Bar'},{name: 'Baz'}]},
+        {name: 'phase 3/4', handlers: [{name: 'Bux'},{name: 'Qux'}]},
+        {name: 'phase 4/4', is_final: true, handlers: [{name: 'Flux'}]}
       ]
     end
     it 'returns a schedule data structure based on the described Plans' do
